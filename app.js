@@ -9,7 +9,7 @@ import { NoteList } from './Classes/NoteList.js';
 //     new Note(document.getElementById('app'),'Name of item', false);
 // });
 
-let noteList = new NoteList(document.getElementById('app'));
+let noteList = new NoteList(document.getElementById('app'),'my');
 
 document.getElementById('action').addEventListener('click',function(){
     noteList.add(prompt('Type text to create note list:'));

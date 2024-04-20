@@ -60,6 +60,9 @@ export class Note{
 
     changeStatus(){
         this.done = !this.done;
+        if(this.container instanceof NoteList){
+            this.container.saveToLocalStorage();
+        }
     }
 
     // Getters and Setters
