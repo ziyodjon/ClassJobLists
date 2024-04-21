@@ -22,16 +22,18 @@ export class NoteList{
     add(name,done = false){
         if(name && name.trim()){
             let newNote = new Note(this,name,done);
-            console.log(newNote);
             newNote.id = this.getNewId();
             this._notes.push(newNote); 
         }
 
-        this.checkEmpty();
         this.saveToLocalStorage();
+        this.checkEmpty();
+        
     }
 
     removeList(value){
+        // console.log(value.id);
+        // console.log(this._notes);
         let note = value;
         let id = '';
 
@@ -39,16 +41,20 @@ export class NoteList{
             id = note.id;
         }
         
-        for(let i = 0; this._notes.length >= i; i++){
+        for(let i = 0; this._notes.length > i; i++){
+            
             if(this._notes[i].id == id){
                 this._notes.splice(i,1);
-                console.log(this._notes[i].id);
-                console.log(id);
+                // console.log(this._notes[i].id);
+                // console.log(id);
+                this.checkEmpty();
+        this.saveToLocalStorage();
             }
         }
 
-        this.checkEmpty();
-        this.saveToLocalStorage();
+        
+        
+        
     }
 
     checkEmpty(){
@@ -79,12 +85,12 @@ export class NoteList{
         
         if(this._key){
             let saveLists = [];
-            
+
             for (const note of this._notes) {
                 saveLists.push({
                     id:note.id,
                     name:note.name,
-                    done:false,
+                    done:note._done,
                 });
             
                 localStorage.setItem(this._key,JSON.stringify(saveLists));
@@ -105,7 +111,7 @@ export class NoteList{
         if(startList.length > 0){
             
             for (const obj of startList) {
-                let newNote = new Note(this, obj.name);
+                let newNote = new Note(this, obj.name, obj.done);
 
                 if(obj.id){
                     newNote.id = obj.id;

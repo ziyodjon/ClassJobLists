@@ -6,7 +6,6 @@ export class Note{
     _done = false;
 
     constructor(container, name = '', done){
-        console.log(container);
 
         this.item = document.createElement('div');
         this.buttonGroup = document.createElement('div');
