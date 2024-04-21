@@ -12,5 +12,5 @@ import { NoteList } from './Classes/NoteList.js';
 let noteList = new NoteList(document.getElementById('app'),'my');
 
 document.getElementById('action').addEventListener('click',function(){
-    noteList.add(prompt('Type text to create note list:'));
+    noteList.add(prompt('Type text to create note list:'),false);
 });

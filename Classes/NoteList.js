@@ -1,7 +1,7 @@
 import { Note } from "./Note.js";
 
 export class NoteList{
-    _note = [];
+    _notes = [];
     _key = null;
     constructor(container, key = null){
         this.container = container;
@@ -13,7 +13,6 @@ export class NoteList{
         
         container.innerHTML = '';
         container.append(this.list);
-        
     }
 
     getNewId(){
@@ -23,8 +22,9 @@ export class NoteList{
     add(name,done = false){
         if(name && name.trim()){
             let newNote = new Note(this,name,done);
+            console.log(newNote);
             newNote.id = this.getNewId();
-            this._note.push(newNote); 
+            this._notes.push(newNote); 
         }
 
         this.checkEmpty();
@@ -38,10 +38,12 @@ export class NoteList{
         if(value instanceof Note){
             id = note.id;
         }
-
-        for(let i = 0; this._note.length > i; i++){
-            if(this._note[i].id === id){
-                this._note.splice(i,1);
+        
+        for(let i = 0; this._notes.length >= i; i++){
+            if(this._notes[i].id == id){
+                this._notes.splice(i,1);
+                console.log(this._notes[i].id);
+                console.log(id);
             }
         }
 
@@ -50,7 +52,7 @@ export class NoteList{
     }
 
     checkEmpty(){
-        if(this._note.length == 0){
+        if(this._notes.length == 0){
 
             this.empty = document.createElement('div');
 
@@ -74,11 +76,11 @@ export class NoteList{
     }
 
     saveToLocalStorage(){
+        
         if(this._key){
             let saveLists = [];
-            console.log(this._note);
-            for (const note of this._note) {
-                console.log(note);
+            
+            for (const note of this._notes) {
                 saveLists.push({
                     id:note.id,
                     name:note.name,
@@ -92,7 +94,7 @@ export class NoteList{
 
     getFromLocalStorage(){
         let startList = [];
-        this._note = [];
+        this._notes = [];
         this.list.innerHTML = '';
 
         if(this._key){
@@ -101,6 +103,7 @@ export class NoteList{
         }
 
         if(startList.length > 0){
+            
             for (const obj of startList) {
                 let newNote = new Note(this, obj.name);
 
@@ -110,7 +113,7 @@ export class NoteList{
                     newNote.id = getNewId();
                 }
 
-                this._note.push(newNote);
+                this._notes.push(newNote);
             }
         }
 

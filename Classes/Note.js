@@ -6,6 +6,8 @@ export class Note{
     _done = false;
 
     constructor(container, name = '', done){
+        console.log(container);
+
         this.item = document.createElement('div');
         this.buttonGroup = document.createElement('div');
         this.nameSpan = document.createElement('span');
@@ -27,6 +29,7 @@ export class Note{
 
         this.doneButton.addEventListener('click',() => {
             this.changeStatus();
+            this.container.saveToLocalStorage();
         });
 
         this.deleteButton.addEventListener('click',() => {
@@ -59,8 +62,9 @@ export class Note{
     }
 
     changeStatus(){
-        this.done = !this.done;
+        
         if(this.container instanceof NoteList){
+            this.done = !this.done;
             this.container.saveToLocalStorage();
         }
     }
