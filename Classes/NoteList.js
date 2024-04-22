@@ -44,15 +44,15 @@ export class NoteList{
         for(let i = 0; this._notes.length > i; i++){
             
             if(this._notes[i].id == id){
+
                 this._notes.splice(i,1);
-                // console.log(this._notes[i].id);
-                // console.log(id);
-                this.checkEmpty();
-        this.saveToLocalStorage();
+                
+                this.saveToLocalStorage();
             }
         }
 
         
+        this.checkEmpty();
         
         
     }
@@ -86,14 +86,18 @@ export class NoteList{
         if(this._key){
             let saveLists = [];
 
-            for (const note of this._notes) {
-                saveLists.push({
-                    id:note.id,
-                    name:note.name,
-                    done:note._done,
-                });
-            
-                localStorage.setItem(this._key,JSON.stringify(saveLists));
+            if(this._notes.length) {
+                for (const note of this._notes) {
+                    saveLists.push({
+                        id:note.id,
+                        name:note.name,
+                        done:note._done,
+                    });
+                
+                    localStorage.setItem(this._key,JSON.stringify(saveLists));
+                }
+            } else {
+                localStorage.setItem(this._key,JSON.stringify([]));
             }
         }
     }
