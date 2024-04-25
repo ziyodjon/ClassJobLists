@@ -1,5 +1,4 @@
-import { Note } from './Classes/Note.js';
-import { NoteList } from './Classes/NoteList.js';
+import { ToDo } from './Classes/ToDo.js';
 
 
 
@@ -9,8 +8,14 @@ import { NoteList } from './Classes/NoteList.js';
 //     new Note(document.getElementById('app'),'Name of item', false);
 // });
 
-let noteList = new NoteList(document.getElementById('app'),'my');
+let app = new ToDo(document.getElementById('app'));
+app.addNewUser('Мои дела','my');
+app.addNewUser('Дела Александра','alex');
+app.addNewUser('Дела Андрея','andrew');
+app.addNewUser('Дела Светы','light');
 
-document.getElementById('action').addEventListener('click',function(){
-    noteList.add(prompt('Type text to create note list:'),false);
-});
+app.currentUser = 'my';
+
+// document.getElementById('action').addEventListener('click',function(){
+//     noteList.add(prompt('Type text to create note list:'),false);
+// });
