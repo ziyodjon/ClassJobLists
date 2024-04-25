@@ -16,6 +16,6 @@ app.addNewUser('Дела Светы','light');
 
 app.currentUser = 'my';
 
-// document.getElementById('action').addEventListener('click',function(){
-//     noteList.add(prompt('Type text to create note list:'),false);
-// });
+document.getElementById('action').addEventListener('click',function(){
+    app.addNewUser(prompt('Type text to create note list:'),'test');
+});
